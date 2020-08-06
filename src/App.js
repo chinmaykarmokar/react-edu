@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Quizrender from './components/Quiz/Quizrender';
+import Register from './components/Forms/Register/Register';
+import Login from './components/Forms/Login/Login';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+
+        state = {
+            mcq : [
+                {
+                  question: "What is the capital of India?",
+                  optionone: "Mumbai",
+                  optiontwo: "Delhi",
+                  optionthree: "Kolkata",
+                  optionfour: "Hyderabad"
+                },
+                {
+                  question: "Who is the PM of India?",
+                  optionone: "Narendra Modi",
+                  optiontwo: "Rahul Gandhi",
+                  optionthree: "Arvind Kejrival",
+                  optionfour: "Amit Shah"
+                }
+            ]
+        }
+
+    render(){
+        return(
+           <div>
+              {/*<Quizrender mcq = {this.state.mcq}/>*/}
+              <Login/>
+              {/*<Register/>*/}
+           </div>
+        )
+    }
 }
 
 export default App;
