@@ -37,6 +37,10 @@ class HomeUI extends Component{
 		this.setState({showProfile:true})
 	}
 
+	componentDidMount() {
+		this.setState({showHome:true});
+	}
+
 	/*handleBilling = () => {
 		this.setState({showBilling:true})
 	}*/
@@ -60,8 +64,8 @@ class HomeUI extends Component{
 					    			fontSize:"15px",
 					    			backgroundColor: "navy",
 					    			boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
-					    			/*borderTopLeftRadius: "50px",
-					    			borderBottomLeftRadius: "50px",*/
+					    			borderTopLeftRadius: "50px",
+					    			borderBottomLeftRadius: "50px",
 					    		}} onClick = {this.handleHome}>Home</button>					    	
 					    	<button 
 					    		style = {{
@@ -82,8 +86,8 @@ class HomeUI extends Component{
 					    			backgroundColor: "navy",
 					    			fontSize:"15px",
 					    			boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
-					    			/*borderTopRightRadius: "50px",
-					    			borderBottomRightRadius: "50px",*/
+					    			borderTopRightRadius: "50px",
+					    			borderBottomRightRadius: "50px",
 					    		}} onClick = {this.handleBilling}>Billing</button>
 					    				    	
 					    </Tabs>        				    
