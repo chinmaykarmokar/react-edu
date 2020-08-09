@@ -17,11 +17,18 @@ class Login extends Component{
 	}
 
 	postDataHandler = () => {
+		
+		const headers = {
+			'Content-Type': 'application/json'
+		}
+
 		const post = {
 			username : this.state.username,
 			password : this.state.password
 		}
-		axios.post('http://192.168.0.107:5000/edu/v1/api/generate-token', post)
+
+		console.log(post);
+		axios.post('http://b98bb773937e.ngrok.io/edu/v1/api/login', post, {headers: headers})
 			.then(response =>{
 				console.log(response);
 			});
@@ -53,7 +60,7 @@ class Login extends Component{
 							id="standard-basic" 
 							label="Password"
 							 
-					    	onChange={(event) => this.setState({name: event.target.password})}  
+					    	onChange={(event) => this.setState({password: event.target.value})}  
 					    />
 					</div>
 					<br/>
