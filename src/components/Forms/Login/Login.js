@@ -8,12 +8,20 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import './Login.css';
 import axios from 'axios';
+import Alert from '@material-ui/lab/Alert';
+import Spinner from '../../Spinner/Spinner';
 
 class Login extends Component{
 
 	state = {
 		username : "",
-		password : ""
+		password : "",
+		successAlert : false,
+		isLoading: true
+	}
+
+	componentDidMount() {
+	    this.setState({isLoading: false})
 	}
 
 	postDataHandler = () => {
@@ -28,16 +36,31 @@ class Login extends Component{
 		}
 
 		console.log(post);
-		axios.post('http://b98bb773937e.ngrok.io/edu/v1/api/login', post, {headers: headers})
-			.then(response =>{
-				console.log(response);
-			});
+		axios.post('http://localhost:5000/edu/v1/api/login', post, {headers: headers})
+		.then(response =>{
+			console.log(response);
+
+			if(response['status'] == 200) {
+				this.setState({successAlert: true});
+
+				window.sessionStorage.setItem('token', response.data['token']);
+
+				window.location.href = "http://localhost:3000/#/home";
+			}
+		})
+		.catch(error => {
+			console.log(error.response);
+
+			if(error.response['status'] == 401) {
+				window.alert('Failed Login');
+			}
+		});
 	}
 
 	render(){
+
 		return(
-			
-			<div className = "LoginDiv">
+			<div className = "LoginDiv">				
 				<div className = "LoginCardLayout">
 					<div>
 						<h3>Login</h3>
@@ -68,6 +91,7 @@ class Login extends Component{
 						<button className = "SubmitData" onClick = {this.postDataHandler}>Log In</button>
 					</div>	
 				</div>
+			
 			</div>
 			
 		)

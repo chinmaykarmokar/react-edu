@@ -24,28 +24,46 @@ class Register extends Component{
 		username : "",
 		password : "",
 		email : "",
-		institute_one : "School",
+		/*institute_one : "School",
 		institute_two : "Junior College",
-		institute_three : "Degree College",
-		institute : ""
+		institute_three : "Degree College",*/
+		institute_type : "Select your institute type",
+		institute_name: "",
+		institute: ""
+	}
+
+	changeSelectHandler = (event) => {
+		this.setState({institute_type: event.target.value})
 	}
 
 	postDataHandler = () => {
+		const headers = {
+			'Content-Type': 'application/json'
+		}
+
 	    const post = {
 	        name: this.state.name,
 	        phone_no: this.state.phone_no,
 	        username: this.state.username,
 	        password: this.state.password,
-	        email: this.state.email,
-	        institute_type_one: this.state.institute_one,
-	        institute_type_two: this.state.institute_two,
-	        institute_type_three: this.state.institute_type_three, 
-	        institute: this.state.institute
+	        email_id: this.state.email,
+			institute_type: this.state.institute_type.toLowerCase(),
+			institute_name: this.state.institute_name
 	    }
-	    axios.post('http://192.168.0.107:5000/edu/v1/api/generate-token', post)
-	        .then(response => {
-	            console.log(response);
-	        });
+
+	    axios.post('http://localhost:5000/edu/v1/users/teacher/add-user', post, {headers: headers})
+		.then(response => {
+			console.log(response);
+		})
+		.catch(error => {
+			console.log(error.response);
+
+			if(error.response['status'] == 401) {
+				window.alert('Failed Login');
+			}
+		});
+
+		
 	}
 
 	render(){
@@ -94,7 +112,7 @@ class Register extends Component{
 							className = "Field" 
 							id="standard-basic" 
 							label="Password" 
-					    	onChange={(event) => this.setState({name: event.target.password})}  
+					    	onChange={(event) => this.setState({password: event.target.value})}  
 					    />
 					</div>		
 					<br/>
@@ -114,20 +132,23 @@ class Register extends Component{
 						<br/>
 					    	<Select
 					        	labelId="demo-simple-select-label"
+					        	onChange={this.changeSelectHandler}
+					        	placeholder="Select a person"
 					        	id="demo-simple-select"
 					        	className = "SelectField"
+					        	defaultValue={this.state.institute_type}
 					    	>
 					    		<MenuItem 
-					    			value={this.state.institute_one}
-					    			onChange={(event) => this.setState({institute_one: event.target.value})}
+									value={"School"}
+					    			
 					    		>School</MenuItem>
 					    		<MenuItem 
-					    			value={this.state.institute_two}
-					    			onChange={(event) => this.setState({institute_two: event.target.value})}
+									value={"Junior College"}
+					    			
 					    		>Junior College</MenuItem>
 					    		<MenuItem 
-					    			value={this.state.institute_three}
-					    			onChange={(event) => this.setState({institute_three: event.target.value})}
+									value={"Degree College"}
+					    			
 					    		>Degree College</MenuItem>
 					    	</Select>
 					</div>   	
@@ -138,8 +159,8 @@ class Register extends Component{
 							className = "Field" 
 							id="standard-basic" 
 							label="Institute Name" 
-							value={this.state.institute} 
-					    	onChange={(event) => this.setState({institute: event.target.value})} 
+							value={this.state.institute_name} 
+					    	onChange={(event) => this.setState({institute_name: event.target.value})} 
 					    />
 					</div>	
 					<br/>
