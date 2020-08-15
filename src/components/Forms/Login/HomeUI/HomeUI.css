@@ -11,3 +11,7 @@
 	border: none;
 	color: #fff;
 }
+
+#userName {
+	text-transform: capitalize;
+}

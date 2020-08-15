@@ -30,13 +30,13 @@ class Login extends Component{
 			'Content-Type': 'application/json'
 		}
 
-		const post = {
+		const postData = {
 			username : this.state.username,
 			password : this.state.password
 		}
 
-		console.log(post);
-		axios.post('http://localhost:5000/edu/v1/api/login', post, {headers: headers})
+		console.log(postData);
+		axios.post('http://localhost:5000/edu/v1/api/login', postData, {headers: headers})
 		.then(response =>{
 			console.log(response);
 

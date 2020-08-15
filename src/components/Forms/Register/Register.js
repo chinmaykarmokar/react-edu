@@ -10,6 +10,7 @@ import CallIcon from '@material-ui/icons/Call';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import EmailIcon from '@material-ui/icons/Email';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import SchoolIcon from '@material-ui/icons/School';
 import DomainIcon from '@material-ui/icons/Domain';
 import Button from '@material-ui/core/Button';
@@ -24,10 +25,8 @@ class Register extends Component{
 		username : "",
 		password : "",
 		email : "",
-		/*institute_one : "School",
-		institute_two : "Junior College",
-		institute_three : "Degree College",*/
 		institute_type : "Select your institute type",
+		account_type : "",
 		institute_name: "",
 		institute: ""
 	}
@@ -117,6 +116,17 @@ class Register extends Component{
 					</div>		
 					<br/>
 					<div>
+						<PeopleOutlineIcon className = "FixedIcon"/>
+						<TextField 
+							className = "Field" 
+							id="standard-basic" 
+							label="Account Type"
+							value={this.state.account_type} 
+					    	onChange={(event) => this.setState({account_type: event.target.value})}  
+					    />
+					</div>
+					<br/>
+					<div>
 						<EmailIcon className = "FixedIcon"/>
 						<TextField 
 							className = "Field" 
@@ -125,7 +135,7 @@ class Register extends Component{
 							value={this.state.email} 
 					    	onChange={(event) => this.setState({email: event.target.value})}  
 					    />
-					</div>	
+					</div>
 					<br/>
 					<div>
 						<SchoolIcon className = "FixedIcon"/><TextField className = "Field" label=" " id="standard-read-only-input" InputProps={{readOnly: true,}} defaultValue="Select Institute Type" />
